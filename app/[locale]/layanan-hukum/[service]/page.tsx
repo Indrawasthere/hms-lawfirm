@@ -3,9 +3,11 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Container from "@/app/components/ui/container";
 import Card from "@/app/components/ui/card";
 import Button from "@/app/components/ui/button";
+import AnimatedSection from "@/app/components/ui/animated-section";
 import {
   Building2,
   Gavel,
@@ -284,6 +286,7 @@ const serviceDetails = {
   },
 };
 
+//// Metadata tetap bisa di-export meskipun pake "use client"
 //export async function generateMetadata({
 //  params,
 //}: {
@@ -305,6 +308,31 @@ const serviceDetails = {
 //    description: serviceData.description,
 //  };
 //}
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
+    },
+  },
+};
 
 export default function ServiceDetailPage({
   params,
@@ -339,133 +367,236 @@ export default function ServiceDetailPage({
 
   return (
     <>
-      <div className="relative bg-navy-900 pt-24 pb-12 md:pt-32 md:pb-20 overflow-hidden">
-        <Container>
-          <Link
-            href={`/${locale}/layanan-hukum`}
-            className="text-navy-300 hover:text-gold-400 inline-flex items-center gap-2 mb-8 transition-colors"
-          >
-            <ArrowLeft size={18} />
-            {t.back}
-          </Link>
-        </Container>
-      </div>
+      {/* ===== HERO SECTION - NAVY ===== */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="relative bg-navy-900 pt-24 pb-12 md:pt-32 md:pb-20 overflow-hidden"
+      >
+        {/* Background Pattern */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.1 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
 
+        <Container>
+          {/* Back Link */}
+          <motion.div
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <Link
+              href={`/${locale}/layanan-hukum`}
+              className="text-navy-300 hover:text-gold-400 inline-flex items-center gap-2 mb-8 transition-colors group"
+            >
+              <motion.div
+                whileHover={{ x: -5 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <ArrowLeft size={18} />
+              </motion.div>
+              {t.back}
+            </Link>
+          </motion.div>
+        </Container>
+      </motion.section>
+
+      {/* ===== TITLE SECTION ===== */}
       <section className="py-12 bg-white">
         <Container>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 bg-gold-100 rounded-2xl flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="flex items-center gap-4 mb-6"
+          >
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 400 }}
+              className="w-16 h-16 bg-gold-100 rounded-2xl flex items-center justify-center"
+            >
               <Icon className="w-8 h-8 text-gold-600" />
-            </div>
+            </motion.div>
             <div>
               <h1 className="font-serif text-3xl md:text-4xl font-bold text-navy-600">
                 {serviceData.title}
               </h1>
               <p className="text-navy-500">{serviceData.description}</p>
             </div>
-          </div>
+          </motion.div>
         </Container>
       </section>
 
+      {/* ===== MAIN CONTENT ===== */}
       <section className="py-12 bg-white">
         <Container>
           <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-8">
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.overview}
-                </h2>
-                <p className="text-navy-500 leading-relaxed">
-                  {serviceData.longDescription}
-                </p>
-              </Card>
+            {/* Left Column - Main Content */}
+            <motion.div
+              className="lg:col-span-2 space-y-8"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {/* Overview */}
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.overview}
+                  </h2>
+                  <p className="text-navy-500 leading-relaxed">
+                    {serviceData.longDescription}
+                  </p>
+                </Card>
+              </motion.div>
 
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.features}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {serviceData.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
-                      <span className="text-navy-500 text-sm">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </Card>
+              {/* Features */}
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.features}
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {serviceData.features.map((feature, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 + idx * 0.05 }}
+                        className="flex items-start gap-2"
+                      >
+                        <CheckCircle className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
+                        <span className="text-navy-500 text-sm">{feature}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </Card>
+              </motion.div>
 
               {/* Process */}
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.process}
-                </h2>
-                <div className="space-y-4">
-                  {serviceData.process.map((step, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-gold-500 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0">
-                        {idx + 1}
-                      </div>
-                      <div>
-                        <p className="text-navy-600 font-medium">{step}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.process}
+                  </h2>
+                  <div className="space-y-4">
+                    {serviceData.process.map((step, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 + idx * 0.1 }}
+                        className="flex items-start gap-3"
+                      >
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          className="w-6 h-6 bg-gold-500 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
+                        >
+                          {idx + 1}
+                        </motion.div>
+                        <div>
+                          <p className="text-navy-600 font-medium">{step}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </Card>
+              </motion.div>
 
               {/* FAQ */}
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.faq}
-                </h2>
-                <div className="space-y-4">
-                  {serviceData.faq.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="border-b border-navy-100 pb-4 last:border-0"
-                    >
-                      <p className="font-medium text-navy-600 mb-2">{item.q}</p>
-                      <p className="text-navy-500 text-sm">{item.a}</p>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-            </div>
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.faq}
+                  </h2>
+                  <div className="space-y-4">
+                    {serviceData.faq.map((item, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.6 + idx * 0.1 }}
+                        className="border-b border-navy-100 pb-4 last:border-0"
+                      >
+                        <p className="font-medium text-navy-600 mb-2">
+                          {item.q}
+                        </p>
+                        <p className="text-navy-500 text-sm">{item.a}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </Card>
+              </motion.div>
+            </motion.div>
 
-            {/* Right Column - CTA */}
-            <div className="space-y-6">
+            {/* Right Column - CTA (Sticky) */}
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+            >
               <Card className="bg-gold-50 border-gold-200 sticky top-24">
                 <h3 className="font-serif text-xl font-semibold text-navy-600 mb-4">
                   {t.consultation}
                 </h3>
                 <p className="text-sm text-navy-500 mb-6">{t.guaranteeText}</p>
+
+                {/* CTA Buttons */}
                 <div className="space-y-3">
-                  <Button
-                    variant="primary"
-                    fullWidth
-                    onClick={() =>
-                      window.open("https://wa.me/6285774968522", "_blank")
-                    }
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <MessageCircle className="mr-2 w-4 h-4" />
-                    {t.consultation}
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    fullWidth
-                    onClick={() =>
-                      (window.location.href =
-                        "mailto:advokathaerudinmuhamad@gmail.com")
-                    }
+                    <Button
+                      variant="primary"
+                      fullWidth
+                      onClick={() =>
+                        window.open("https://wa.me/6285774968522", "_blank")
+                      }
+                    >
+                      <MessageCircle className="mr-2 w-4 h-4" />
+                      {t.consultation}
+                    </Button>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <Mail className="mr-2 w-4 h-4" />
-                    {t.email}
-                  </Button>
+                    <Button
+                      variant="secondary"
+                      fullWidth
+                      onClick={() =>
+                        (window.location.href =
+                          "mailto:advokathaerudinmuhamad@gmail.com")
+                      }
+                    >
+                      <Mail className="mr-2 w-4 h-4" />
+                      {t.email}
+                    </Button>
+                  </motion.div>
                 </div>
 
                 {/* Quick Info */}
-                <div className="mt-6 pt-6 border-t border-gold-200">
-                  <div className="flex items-start gap-3">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="mt-6 pt-6 border-t border-gold-200"
+                >
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    className="flex items-start gap-3"
+                  >
                     <Clock className="w-4 h-4 text-gold-500 shrink-0 mt-1" />
                     <div>
                       <p className="text-xs font-medium text-navy-600">
@@ -473,8 +604,12 @@ export default function ServiceDetailPage({
                       </p>
                       <p className="text-xs text-navy-400">Dalam 1 jam kerja</p>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3 mt-3">
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    className="flex items-start gap-3 mt-3"
+                  >
                     <Shield className="w-4 h-4 text-gold-500 shrink-0 mt-1" />
                     <div>
                       <p className="text-xs font-medium text-navy-600">
@@ -484,10 +619,10 @@ export default function ServiceDetailPage({
                         Konsultasi awal gratis
                       </p>
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               </Card>
-            </div>
+            </motion.div>
           </div>
         </Container>
       </section>

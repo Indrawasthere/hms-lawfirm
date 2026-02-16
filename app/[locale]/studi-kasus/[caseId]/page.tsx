@@ -3,9 +3,11 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Container from "@/app/components/ui/container";
 import Card from "@/app/components/ui/card";
 import Button from "@/app/components/ui/button";
+import AnimatedSection from "@/app/components/ui/animated-section";
 import {
   ArrowLeft,
   Calendar,
@@ -14,6 +16,7 @@ import {
   Briefcase,
   MessageCircle,
   Mail,
+  CheckCircle,
 } from "lucide-react";
 
 const caseDetails = {
@@ -51,7 +54,37 @@ const caseDetails = {
         name: "Direktur Utama PT. Keluarga Sejahtera",
       },
     },
-    // ... tambahkan detail untuk kasus lainnya
+    "sengketa-properti-1": {
+      title: "Sengketa Lahan Proyek Perumahan",
+      client: "PT. Griya Indah",
+      category: "Properti",
+      year: "2023",
+      duration: "6 bulan",
+      icon: Briefcase,
+      challenge:
+        "Klien digugat oleh warga sekitar terkait pembangunan proyek perumahan yang dituduh melanggar garis sempadan sungai. Proyek terancam dihentikan.",
+      background:
+        "Proyek perumahan seluas 5 hektar ini telah mendapatkan semua perizinan yang diperlukan. Namun warga sekitar mengklaim bahwa pembangunan melanggar garis sempadan sungai dan berpotensi menyebabkan banjir.",
+      strategy: [
+        "Melakukan kajian ulang terhadap IMB dan dokumen perizinan",
+        "Melakukan pengukuran ulang bersama BPN",
+        "Memfasilitasi dialog dengan warga dan pemerintah daerah",
+        "Menyusun opsi kompensasi dan penyesuaian",
+      ],
+      implementation:
+        "Proses mediasi dilakukan dalam 5 pertemuan dengan melibatkan Dinas PUPR dan BPN. Kami berhasil membuktikan bahwa proyek telah sesuai perizinan, namun tetap memberikan kompensasi berupa fasilitas umum untuk warga sekitar.",
+      outcome: [
+        "Proyek dilanjutkan dengan penyesuaian minor",
+        "Pembangunan fasilitas umum untuk warga",
+        "Hubungan baik dengan warga sekitar terbangun",
+        "Tidak ada gugatan lanjutan",
+      ],
+      testimonial: {
+        quote:
+          "Terima kasih HMP Lawfirm yang berhasil menyelamatkan proyek kami dan membangun hubungan baik dengan warga.",
+        name: "Direktur PT. Griya Indah",
+      },
+    },
   },
   en: {
     "sengketa-korporat-1": {
@@ -87,7 +120,37 @@ const caseDetails = {
         name: "President Director of PT. Keluarga Sejahtera",
       },
     },
-    // ... tambahkan detail untuk kasus lainnya
+    "sengketa-properti-1": {
+      title: "Housing Project Land Dispute",
+      client: "PT. Griya Indah",
+      category: "Property",
+      year: "2023",
+      duration: "6 months",
+      icon: Briefcase,
+      challenge:
+        "Client was sued by local residents regarding housing project development allegedly violating river border lines. Project threatened to be stopped.",
+      background:
+        "This 5-hectare housing project had obtained all necessary permits. However, local residents claimed the construction violated river border lines and could potentially cause flooding.",
+      strategy: [
+        "Conducted review of building permits and licensing documents",
+        "Re-measured with National Land Agency",
+        "Facilitated dialogue with residents and local government",
+        "Prepared compensation and adjustment options",
+      ],
+      implementation:
+        "Mediation process conducted in 5 meetings involving Public Works Office and Land Agency. We successfully proved the project complied with permits, while still providing public facility compensation to residents.",
+      outcome: [
+        "Project continued with minor adjustments",
+        "Public facilities built for residents",
+        "Good relations with local community established",
+        "No further lawsuits",
+      ],
+      testimonial: {
+        quote:
+          "Thank you HMP Lawfirm for saving our project and building good relations with the community.",
+        name: "Director of PT. Griya Indah",
+      },
+    },
   },
 };
 
@@ -112,6 +175,31 @@ const caseDetails = {
 //    description: caseData.challenge.substring(0, 160),
 //  };
 //}
+//
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
+    },
+  },
+};
 
 export default function CaseDetailPage({
   params,
@@ -148,148 +236,256 @@ export default function CaseDetailPage({
 
   return (
     <>
-      {/* Back Navigation */}
-      <div className="bg-navy-50 py-4">
+      {/* ===== BACK NAVIGATION ===== */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-navy-50 py-4"
+      >
         <Container>
           <Link
             href={`/${locale}/studi-kasus`}
-            className="text-navy-300 hover:text-gold-400 inline-flex items-center gap-2 mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-navy-600 hover:text-gold-500 transition-colors group"
           >
-            <ArrowLeft size={18} />
+            <motion.div
+              whileHover={{ x: -5 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <ArrowLeft size={18} />
+            </motion.div>
             {t.back}
           </Link>
         </Container>
-      </div>
+      </motion.div>
 
-      {/* Hero */}
-      <section className="bg-navy-900 text-white pt-40 pb-20 md:pt-48 md:pb-32">
-        <Container>
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 bg-gold-100 rounded-xl flex items-center justify-center">
-              <Icon className="w-7 h-7 text-gold-600" />
-            </div>
+      {/* ===== HERO SECTION - NAVY (sesuai request) ===== */}
+      <section className="relative bg-navy-900 text-white pt-40 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        {/* Background Pattern */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.1 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+
+        {/* Decorative Elements */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute top-20 -right-20 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"
+        />
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="absolute -bottom-20 -left-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"
+        />
+
+        <Container className="relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center gap-4 mb-4"
+          >
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 400 }}
+              className="w-16 h-16 bg-gold-100 rounded-2xl flex items-center justify-center"
+            >
+              <Icon className="w-8 h-8 text-gold-600" />
+            </motion.div>
             <div>
-              <div className="flex items-center gap-3 mb-1">
-                <span className="text-sm font-medium text-gold-600 bg-gold-50 px-3 py-1 rounded-full">
-                  {caseData.category}
-                </span>
-              </div>
-              <h1 className="font-serif text-3xl md:text-4xl font-bold text-navy-600">
+              <motion.span
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="inline-block text-sm font-medium text-gold-400 bg-white/10 px-3 py-1 rounded-full mb-2"
+              >
+                {caseData.category}
+              </motion.span>
+              <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white"
+              >
                 {caseData.title}
-              </h1>
+              </motion.h1>
             </div>
-          </div>
+          </motion.div>
 
           {/* Meta Info */}
-          <div className="flex flex-wrap gap-6 mt-4">
-            <div className="flex items-center gap-2">
-              <Users className="w-4 h-4 text-navy-400" />
-              <span className="text-sm text-navy-500">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex flex-wrap gap-6 mt-6"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05, x: 5 }}
+              className="flex items-center gap-2 text-navy-200"
+            >
+              <Users className="w-4 h-4" />
+              <span className="text-sm">
                 {t.client}: {caseData.client}
               </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-navy-400" />
-              <span className="text-sm text-navy-500">
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05, x: 5 }}
+              className="flex items-center gap-2 text-navy-200"
+            >
+              <Calendar className="w-4 h-4" />
+              <span className="text-sm">
                 {t.year}: {caseData.year}
               </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-navy-400" />
-              <span className="text-sm text-navy-500">
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05, x: 5 }}
+              className="flex items-center gap-2 text-navy-200"
+            >
+              <Clock className="w-4 h-4" />
+              <span className="text-sm">
                 {t.duration}: {caseData.duration}
               </span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </Container>
       </section>
 
-      {/* Main Content */}
+      {/* ===== MAIN CONTENT ===== */}
       <section className="py-12 bg-white">
         <Container>
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left Column - Main Content */}
-            <div className="lg:col-span-2 space-y-8">
+            <motion.div
+              className="lg:col-span-2 space-y-8"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {/* Challenge */}
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.challenge}
-                </h2>
-                <p className="text-navy-500 leading-relaxed">
-                  {caseData.challenge}
-                </p>
-              </Card>
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.challenge}
+                  </h2>
+                  <p className="text-navy-500 leading-relaxed">
+                    {caseData.challenge}
+                  </p>
+                </Card>
+              </motion.div>
 
               {/* Background */}
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.background}
-                </h2>
-                <p className="text-navy-500 leading-relaxed">
-                  {caseData.background}
-                </p>
-              </Card>
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.background}
+                  </h2>
+                  <p className="text-navy-500 leading-relaxed">
+                    {caseData.background}
+                  </p>
+                </Card>
+              </motion.div>
 
               {/* Strategy */}
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.strategy}
-                </h2>
-                <ul className="space-y-3">
-                  {caseData.strategy.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <span className="w-5 h-5 bg-gold-500 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5">
-                        {idx + 1}
-                      </span>
-                      <span className="text-navy-500">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.strategy}
+                  </h2>
+                  <ul className="space-y-3">
+                    {caseData.strategy.map((item, idx) => (
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + idx * 0.05 }}
+                        className="flex items-start gap-3"
+                      >
+                        <motion.span
+                          whileHover={{ scale: 1.2 }}
+                          className="w-5 h-5 bg-gold-500 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5"
+                        >
+                          {idx + 1}
+                        </motion.span>
+                        <span className="text-navy-500">{item}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </Card>
+              </motion.div>
 
               {/* Implementation */}
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.implementation}
-                </h2>
-                <p className="text-navy-500 leading-relaxed">
-                  {caseData.implementation}
-                </p>
-              </Card>
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.implementation}
+                  </h2>
+                  <p className="text-navy-500 leading-relaxed">
+                    {caseData.implementation}
+                  </p>
+                </Card>
+              </motion.div>
 
               {/* Outcome */}
-              <Card>
-                <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                  {t.outcome}
-                </h2>
-                <ul className="space-y-2">
-                  {caseData.outcome.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <span className="text-gold-500 font-bold">✓</span>
-                      <span className="text-navy-500">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
+              <motion.div variants={itemVariants}>
+                <Card>
+                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                    {t.outcome}
+                  </h2>
+                  <ul className="space-y-2">
+                    {caseData.outcome.map((item, idx) => (
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + idx * 0.05 }}
+                        className="flex items-start gap-2"
+                      >
+                        <CheckCircle className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
+                        <span className="text-navy-500">{item}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </Card>
+              </motion.div>
 
               {/* Testimonial */}
               {caseData.testimonial && (
-                <Card className="bg-gold-50 border-gold-200">
-                  <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
-                    {t.testimonial}
-                  </h2>
-                  <blockquote className="italic text-navy-600 mb-3">
-                    "{caseData.testimonial.quote}"
-                  </blockquote>
-                  <p className="text-sm text-navy-500">
-                    — {caseData.testimonial.name}
-                  </p>
-                </Card>
+                <motion.div variants={itemVariants}>
+                  <Card className="bg-gold-50 border-gold-200">
+                    <h2 className="font-serif text-2xl font-semibold text-navy-600 mb-4">
+                      {t.testimonial}
+                    </h2>
+                    <motion.blockquote
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="italic text-navy-600 mb-3"
+                    >
+                      "{caseData.testimonial.quote}"
+                    </motion.blockquote>
+                    <p className="text-sm text-navy-500">
+                      — {caseData.testimonial.name}
+                    </p>
+                  </Card>
+                </motion.div>
               )}
-            </div>
+            </motion.div>
 
             {/* Right Column - CTA */}
-            <div className="space-y-6">
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
               <Card className="bg-navy-900 text-white sticky top-24">
                 <h3 className="font-serif text-xl font-semibold mb-4">
                   {locale === "id"
@@ -302,54 +498,75 @@ export default function CaseDetailPage({
                     : "Our team is ready to handle your case with proven successful strategies."}
                 </p>
                 <div className="space-y-3">
-                  <Button
-                    variant="outline"
-                    fullWidth
-                    onClick={() =>
-                      window.open("https://wa.me/6285774968522", "_blank")
-                    }
-                    className="border-white text-white hover:bg-white/10"
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <MessageCircle className="mr-2 w-4 h-4" />
-                    {t.consultation}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    fullWidth
-                    onClick={() =>
-                      (window.location.href =
-                        "mailto:advokathaerudinmuhamad@gmail.com")
-                    }
-                    className="border-white text-white hover:bg-white/10"
+                    <Button
+                      variant="outline"
+                      fullWidth
+                      onClick={() =>
+                        window.open("https://wa.me/6285774968522", "_blank")
+                      }
+                      className="border-white text-white hover:bg-white/10"
+                    >
+                      <MessageCircle className="mr-2 w-4 h-4" />
+                      {t.consultation}
+                    </Button>
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <Mail className="mr-2 w-4 h-4" />
-                    {t.email}
-                  </Button>
+                    <Button
+                      variant="outline"
+                      fullWidth
+                      onClick={() =>
+                        (window.location.href =
+                          "mailto:advokathaerudinmuhamad@gmail.com")
+                      }
+                      className="border-white text-white hover:bg-white/10"
+                    >
+                      <Mail className="mr-2 w-4 h-4" />
+                      {t.email}
+                    </Button>
+                  </motion.div>
                 </div>
 
                 {/* Quick Stats */}
-                <div className="mt-6 pt-6 border-t border-navy-500">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="mt-6 pt-6 border-t border-navy-500"
+                >
                   <div className="grid grid-cols-2 gap-4 text-center">
-                    <div>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
                       <div className="text-2xl font-bold text-gold-400">
                         15+
                       </div>
                       <div className="text-xs text-navy-200">
                         Tahun Pengalaman
                       </div>
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
                       <div className="text-2xl font-bold text-gold-400">
                         500+
                       </div>
                       <div className="text-xs text-navy-200">
                         Kasus Terselesaikan
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               </Card>
-            </div>
+            </motion.div>
           </div>
         </Container>
       </section>

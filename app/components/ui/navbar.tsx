@@ -75,7 +75,7 @@ const navigation = [
   { href: "kontak", key: "contact", label: "Kontak", labelEn: "Contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ forceSolid = false }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -126,10 +126,14 @@ export default function Navbar() {
       : "bg-white border-navy-50",
   };
 
-  // Text colors
   const textColors = {
-    primary: isScrolled || isDarkMode ? "text-white" : "text-navy-600",
-    secondary: isScrolled || isDarkMode ? "text-white/80" : "text-navy-600",
+    primary: isScrolled
+      ? "text-white"
+      : isDarkPage
+        ? "text-white"
+        : "text-navy-900",
+
+    secondary: isScrolled ? "text-white/80" : "text-navy-600",
     muted: isScrolled || isDarkMode ? "text-white/60" : "text-navy-400",
     gold: "text-gold-500",
   };
