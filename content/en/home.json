@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "title": "Trusted Legal Solutions for Indonesian Businesses | HMP Law Firm",
+    "description": "Professional legal consultants with 15+ years of experience. We serve corporate law, litigation, and compliance for Indonesian businesses.",
+    "keywords": "law firm jakarta, business law, legal consultants indonesia"
+  },
+  "hero": {
+    "headline": "Trusted Legal Solutions for Your Business",
+    "subheadline": "With 15+ years of experience serving hundreds of corporations, we deliver tailored legal strategies to protect, grow, and win every aspect of your business.",
+    "cta_primary": "Consult via WhatsApp",
+    "cta_secondary": "Email Our Legal Team"
+  },
+  "value_props": [
+    {
+      "icon": "Shield",
+      "title": "15+ Years of Experience",
+      "description": "Serving hundreds of corporate clients across various industries with proven track records."
+    },
+    {
+      "icon": "Target",
+      "title": "Tailored Legal Strategy",
+      "description": "Customized solutions aligned with your business needs for maximum impact."
+    },
+    {
+      "icon": "Award",
+      "title": "Proven Results",
+      "description": "Track record of winning cases and resolutions worth billions in client value."
+    }
+  ],
+  "services": [
+    {
+      "id": "corporate",
+      "title": "Corporate Law",
+      "description": "Company formation, management, and restructuring with full regulatory compliance.",
+      "icon": "Building2"
+    },
+    {
+      "id": "litigation",
+      "title": "Civil Litigation",
+      "description": "Handling business disputes, contracts, and civil cases with optimal defensive strategy.",
+      "icon": "Scale"
+    },
+    {
+      "id": "compliance",
+      "title": "Regulatory Compliance",
+      "description": "Legal audit, compliance review, and ongoing legal risk management.",
+      "icon": "CheckCircle"
+    },
+    {
+      "id": "labor",
+      "title": "Employment Law",
+      "description": "Industrial relations, termination procedures, and labor dispute resolution.",
+      "icon": "Users"
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": "case-001",
+      "title": "Contract Dispute Settlement Worth IDR 2.5 Billion",
+      "industry": "Manufacturing",
+      "problem": "Construction contractor refused payment for project phase 2 due to material defect claims.",
+      "strategy": "In-depth analysis of contract documents and technical specifications, intensive negotiation with mediator.",
+      "outcome": "Client won 100%, received full payment IDR 2.5B + contractual penalty interest.",
+      "year": 2023
+    },
+    {
+      "id": "case-002",
+      "title": "Company Restructuring - PT Sukses Jaya Industri",
+      "industry": "Manufacturing",
+      "problem": "Company facing declining performance, required reorganization and structured layoffs.",
+      "strategy": "Legal framework analysis for terminations, union negotiations, comprehensive documentation.",
+      "outcome": "Successful termination of 250 employees without disputes, operational savings IDR 8M/year.",
+      "year": 2022
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Budi Santoso",
+      "position": "CEO PT Maju Sejahtera",
+      "quote": "HMP Law Firm is our trusted partner. They understand business, not just legal aspects.",
+      "company": "PT Maju Sejahtera"
+    },
+    {
+      "name": "Siti Nurhaliza",
+      "position": "Finance Director PT Global Trade",
+      "quote": "With their support, we can focus on business while legal risks are well-managed.",
+      "company": "PT Global Trade"
+    }
+  ],
+  "team": [
+    {
+      "id": "lawyer-001",
+      "name": "Ir. H. Achmad Wijaya, S.H., M.H.",
+      "title": "Senior Partner & Founder",
+      "specialization": "Corporate Law, M&A",
+      "experience": "25+ years"
+    },
+    {
+      "id": "lawyer-002",
+      "name": "Dwi Retno Utami, S.H.",
+      "title": "Senior Associate",
+      "specialization": "Litigation, Commercial Law",
+      "experience": "12+ years"
+    }
+  ],
+  "navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Legal Services",
+    "cases": "Case Studies",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "footer": {
+    "company": "About Company",
+    "description": "HMP Law Firm is a leading law firm serving the legal needs of Indonesian businesses with international standards.",
+    "quickLinks": "Quick Links",
+    "home": "Home",
+    "services": "Services",
+    "cases": "Case Studies",
+    "contact": "Contact",
+    "contactInfo": "Contact Us",
+    "needLegalHelp": "Need Legal Help?",
+    "whatsappCta": "Consult via WhatsApp",
+    "emailCta": "Send Email",
+    "copyright": "All rights reserved."
+  }
+}

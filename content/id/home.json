@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "title": "Solusi Hukum Terpercaya untuk Bisnis Indonesia | HMP Law Firm",
+    "description": "Konsultan hukum profesional dengan pengalaman 15+ tahun. Kami melayani corporate law, litigasi, dan compliance untuk bisnis Indonesia.",
+    "keywords": "konsultan hukum jakarta, hukum bisnis, firma hukum indonesia"
+  },
+  "hero": {
+    "headline": "Solusi Hukum Terpercaya untuk Bisnis Anda",
+    "subheadline": "Dengan pengalaman 15+ tahun melayani ratusan perusahaan, kami memberikan strategi hukum yang tepat untuk melindungi, mengembangkan, dan memenangkan setiap aspek bisnis Anda.",
+    "cta_primary": "Konsultasi via WhatsApp",
+    "cta_secondary": "Email Tim Hukum Kami"
+  },
+  "value_props": [
+    {
+      "icon": "Shield",
+      "title": "15+ Tahun Pengalaman",
+      "description": "Melayani ratusan klien korporat di berbagai industri dengan track record terbukti."
+    },
+    {
+      "icon": "Target",
+      "title": "Strategi Hukum Tepat",
+      "description": "Disesuaikan dengan kebutuhan spesifik bisnis Anda untuk hasil maksimal."
+    },
+    {
+      "icon": "Award",
+      "title": "Hasil Terbukti",
+      "description": "Track record menang kasus dan penyelesaian klien senilai miliaran rupiah."
+    }
+  ],
+  "services": [
+    {
+      "id": "corporate",
+      "title": "Hukum Korporat",
+      "description": "Pendirian, pengelolaan, dan restrukturisasi perusahaan dengan kepatuhan regulasi penuh.",
+      "icon": "Building2"
+    },
+    {
+      "id": "litigation",
+      "title": "Litigasi Perdata",
+      "description": "Penanganan sengketa bisnis, kontrak, dan perdata dengan strategi defensif optimal.",
+      "icon": "Scale"
+    },
+    {
+      "id": "compliance",
+      "title": "Kepatuhan Regulasi",
+      "description": "Audit legal, compliance review, dan manajemen risiko hukum berkelanjutan.",
+      "icon": "CheckCircle"
+    },
+    {
+      "id": "labor",
+      "title": "Hukum Ketenagakerjaan",
+      "description": "Penanganan hubungan industrial, PHK, dan perselisihan ketenagakerjaan.",
+      "icon": "Users"
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": "case-001",
+      "title": "Penyelesaian Sengketa Kontrak Senilai Rp 2,5 Miliar",
+      "industry": "Manufaktur",
+      "problem": "Kontraktor pembangunan menolak pembayaran untuk fase 2 proyek karena klaim material defect.",
+      "strategy": "Analisis mendalam dokumen kontrak dan spesifikasi teknis, negosiasi intensif dengan mediator.",
+      "outcome": "Klien menang 100%, menerima pembayaran penuh Rp 2,5M + bunga denda kontraktual.",
+      "year": 2023
+    },
+    {
+      "id": "case-002",
+      "title": "Restrukturisasi Perusahaan PT Sukses Jaya Industri",
+      "industry": "Industri",
+      "problem": "Perusahaan menghadapi kinerja menurun, perlu reorganisasi dan PHK terstruktur.",
+      "strategy": "Analisis legal framework PHK, negosiasi dengan serikat kerja, dokumentasi penuh.",
+      "outcome": "Penyelesaian PHK 250 karyawan tanpa sengketa, penghematan operasional Rp 8M/tahun.",
+      "year": 2022
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Budi Santoso",
+      "position": "CEO PT Maju Sejahtera",
+      "quote": "HMP Law Firm adalah partner terpercaya kami. Mereka memahami bisnis, bukan hanya aspek legal.",
+      "company": "PT Maju Sejahtera"
+    },
+    {
+      "name": "Siti Nurhaliza",
+      "position": "Direktur Finance PT Global Trade",
+      "quote": "Dengan bantuan mereka, kami dapat fokus bisnis sementara legal risk ter-manage dengan baik.",
+      "company": "PT Global Trade"
+    }
+  ],
+  "team": [
+    {
+      "id": "lawyer-001",
+      "name": "Ir. H. Achmad Wijaya, S.H., M.H.",
+      "title": "Senior Partner & Founder",
+      "specialization": "Corporate Law, M&A",
+      "experience": "25+ tahun"
+    },
+    {
+      "id": "lawyer-002",
+      "name": "Dwi Retno Utami, S.H.",
+      "title": "Senior Associate",
+      "specialization": "Litigation, Commercial Law",
+      "experience": "12+ tahun"
+    }
+  ],
+  "navigation": {
+    "home": "Beranda",
+    "about": "Tentang Kami",
+    "services": "Layanan Hukum",
+    "cases": "Studi Kasus",
+    "testimonials": "Testimoni",
+    "contact": "Kontak"
+  },
+  "footer": {
+    "company": "Tentang Perusahaan",
+    "description": "HMP Law Firm adalah firma hukum terkemuka yang melayani kebutuhan legal bisnis Indonesia dengan standar internasional.",
+    "quickLinks": "Link Cepat",
+    "home": "Beranda",
+    "services": "Layanan",
+    "cases": "Studi Kasus",
+    "contact": "Kontak",
+    "contactInfo": "Kontak Kami",
+    "needLegalHelp": "Butuh Bantuan Hukum?",
+    "whatsappCta": "Konsultasi via WhatsApp",
+    "emailCta": "Kirim Email",
+    "copyright": "Semua hak cipta dilindungi."
+  }
+}

@@ -1,0 +1,38 @@
+/* styles/globals.css */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* body styling dipindah ke layout.tsx untuk menghindari syntax error */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-serif font-bold;
+    }
+}
+
+@layer components {
+    .section-container {
+        @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+    .section {
+        @apply py-16 md:py-24;
+    }
+    .section-title {
+        @apply text-3xl md:text-4xl font-serif text-navy mb-4;
+    }
+    .section-subtitle {
+        @apply text-center text-charcoal mb-12 max-w-2xl mx-auto text-lg;
+    }
+}
