@@ -57,7 +57,7 @@ export default function FloatingWhatsApp() {
 
           {/* Body */}
           <div className="p-4">
-            <div className="bg-navy-50 rounded-lg p-3 mb-4">
+            <div className="bg-navy-50 rounded-2xl p-3 mb-4">
               <p className="text-sm text-navy-600">
                 👋 Halo! Ada yang bisa kami bantu? Tim hukum kami siap
                 memberikan konsultasi cepat via WhatsApp.
@@ -66,7 +66,7 @@ export default function FloatingWhatsApp() {
 
             <button
               onClick={handleWhatsApp}
-              className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-2xl transition-colors flex items-center justify-center gap-2"
             >
               <Send size={18} />
               Mulai Chat Sekarang
@@ -91,7 +91,7 @@ export default function FloatingWhatsApp() {
         <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-20"></span>
 
         {/* Tooltip */}
-        <span className="absolute right-16 bg-navy-600 text-white text-sm py-1 px-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <span className="absolute right-16 bg-navy-900 text-white text-sm py-1 px-2 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           Konsultasi via WA
         </span>
       </button>

@@ -4,6 +4,7 @@ import Navbar from "@/app/components/ui/navbar";
 import Footer from "@/app/components/ui/footer";
 import FloatingWhatsApp from "@/app/components/ui/floating-whatsapp";
 import { siteConfig } from "@/utils/constants";
+import ConditionalPadding from "@/app/components/ui/conditional-padding"; // <-- NEW
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -79,7 +80,6 @@ export default function LocaleLayout({
     notFound();
   }
 
-  // JSON-LD Structured Data
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LegalService",
@@ -106,12 +106,12 @@ export default function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
       <head>
-        <link rel="alternate" href={`${siteConfig.url}/id`} hreflang="id" />
-        <link rel="alternate" href={`${siteConfig.url}/en`} hreflang="en" />
+        <link rel="alternate" href={`${siteConfig.url}/id`} hrefLang="id" />
+        <link rel="alternate" href={`${siteConfig.url}/en`} hrefLang="en" />
         <link
           rel="alternate"
           href={`${siteConfig.url}/id`}
-          hreflang="x-default"
+          hrefLang="x-default"
         />
         <script
           type="application/ld+json"
@@ -120,7 +120,8 @@ export default function LocaleLayout({
       </head>
       <body className="font-sans antialiased">
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <ConditionalPadding>{children}</ConditionalPadding>
+        {/* ======================================== */}
         <Footer />
         <FloatingWhatsApp />
       </body>

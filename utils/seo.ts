@@ -15,7 +15,7 @@ export const generateMetadata = ({
   path = "",
   images = ["/og-image.jpg"],
 }: SEOParams): Metadata => {
-  const baseUrl = "https://hmplawfirm.com";
+  const baseUrl = "";
   const url = `${baseUrl}/${locale}${path}`;
 
   return {
